@@ -11,3 +11,13 @@ def index(user=None):
     else:
         kwargs = dict(title=title, user=user)
     return render_template('index.html', **kwargs)
+
+
+@app.route('/stocks/')
+def loop():
+    stocks = [
+        {"symbol": "KO", "price": 43.2},
+        {"symbol": "DIS", "price": 106.69},
+        {"symbol": "BP", "price": 457.05}
+    ]
+    return render_template("stocks.html", data=stocks)

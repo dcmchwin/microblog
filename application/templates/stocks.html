@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Practice</title>
+</head>
+<body>
+    <h1>Stocks:</h1>
+    <table>
+        <tr>
+            <th>Symbol<th>
+            <th>Price<th>
+        </tr>
+        {% for stock in data %}
+        <tr>
+            <td>{{ stock.symbol }}</td>
+            <td>{{ stock.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
