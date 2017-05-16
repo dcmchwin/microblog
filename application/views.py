@@ -8,10 +8,20 @@ app = Flask(__name__)
 def index(user=None):
     """Render an index."""
     title = 'INDEX'
+    posts = [
+        {
+            'author': 'Miguel',
+            'body': 'Este blog no es muy interesante, no?'
+        },
+        {
+            'author': 'Francois',
+            'body': 'Je suis un massive stereotype'
+        }
+    ]
     if user is None:
-        kwargs = dict(title=title)
+        kwargs = dict(title=title, posts=posts)
     else:
-        kwargs = dict(title=title, user=user)
+        kwargs = dict(title=title, posts=posts, user=user)
     return render_template('index.html', **kwargs)
 
 
