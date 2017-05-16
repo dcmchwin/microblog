@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %} - Flask Practice</title>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='test_style.css?q=75') }}" />
+</head>
+<body>
+    <div id="navbar">
+        <ul>
+            <li><a href="stupid_ugly_child">Stupid Ugly Child</a></li>
+            <li><a href="clever_child">Clever Child</a></li>
+        </ul>
+    </div>
+    <div id="footer">
+        {% block footer %}
+        &copy; Copyright dcm 2017
+        {% endblock %}
+    </div>
+    <div id="test_p">
+        <p>Test</p>
+    </div>
+</body>
+</html>
