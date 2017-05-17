@@ -1,13 +1,18 @@
-from flask import Flask, render_template
+"""Views of the web application."""
+
+from flask import Flask, render_template, flash, redirect
+from .forms import LoginForm
 
 app = Flask(__name__)
+app.config.from_object('config')
 
 
 @app.route('/')
-@app.route('/<user>')
+@app.route('/index')
 def index(user=None):
     """Render an index."""
     title = 'INDEX'
+    user = 'euroclicheafficionado1'
     posts = [
         {
             'author': 'Miguel',
@@ -18,10 +23,7 @@ def index(user=None):
             'body': 'Je suis un massive stereotype'
         }
     ]
-    if user is None:
-        kwargs = dict(title=title, posts=posts)
-    else:
-        kwargs = dict(title=title, posts=posts, user=user)
+    kwargs = dict(title=title, posts=posts, user=user)
     return render_template('index.html', **kwargs)
 
 
@@ -41,3 +43,16 @@ def child(child_name):
     """Practice template inheritance."""
     template_name = child_name + '.html'
     return render_template(template_name)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """Render a simple login form."""
+    form = LoginForm()
+    if form.validate_on_submit():
+        flash('Login requested for OpenId={}, remember_me={}'
+              .format(form.openid.data, form.remember_me.data))
+        return redirect('/index')
+    return render_template('login.html',
+                           title='Sign In',
+                           form=form)
